@@ -4,6 +4,10 @@ import textwrap
 import requests
 import streamlit as st
 
+# ---------------------------
+# Configuración básica
+# ---------------------------
+
 OLLAMA_URL = "http://localhost:11434/api/chat"
 OLLAMA_MODEL = "llama3.3"   # Ajusta si tu modelo tiene otro nombre
 
@@ -13,30 +17,61 @@ st.set_page_config(
     layout="wide",
 )
 
+# Estilos generales
+st.markdown(
+    """
+    <style>
+    .main {
+        background-color: #0e1117;
+    }
+    .prompt-card {
+        background-color: #161a23;
+        padding: 1.2rem 1.5rem;
+        border-radius: 0.8rem;
+        border: 1px solid #262b3a;
+        margin-bottom: 1.2rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Título y descripción (como te gustaba)
 st.title("✨ PromptLab Academy – Prompt Quality Analyzer (Ollama)")
 st.write(
     "Pega tu prompt abajo y la app lo evaluará del **1 al 100**, "
-    "te dará un diagnóstico detallado y generará una versión optimizada."
+    "te dará un diagnóstico detallado y generará una versión optimizada lista para copiar y usar."
+)
+
+# Separador azul oscuro (50% ancho)
+st.markdown(
+    """
+    <hr style="
+        border: 1px solid #1f3b5b;
+        width: 50%;
+        margin: 0.5rem 0 1.5rem 0;
+    ">
+    """,
+    unsafe_allow_html=True,
 )
 
 # ---------------------------
 # Helpers para hablar con Ollama
 # ---------------------------
 
-def ollama_chat(messages, model: str = OLLAMA_MODEL) -> str:
+def ollama_chat(messages, model: str = OLLAMA_MODEL, timeout: int = 180) -> str:
     """
     Llama a la API de chat de Ollama y devuelve el texto del assistant.
     """
     payload = {
         "model": model,
         "messages": messages,
-        "stream": False,  # importante: respuesta no en streaming
+        "stream": False,
     }
 
-    resp = requests.post(OLLAMA_URL, json=payload, timeout=120)
+    resp = requests.post(OLLAMA_URL, json=payload, timeout=timeout)
     resp.raise_for_status()
     data = resp.json()
-    # Estructura típica: {"message": {"role": "assistant", "content": "..."}, "done": true, ...}
     return data["message"]["content"]
 
 
@@ -119,10 +154,7 @@ def call_prompt_evaluator(user_prompt: str) -> dict:
 
     messages = [
         {"role": "system", "content": system_message},
-        {
-            "role": "user",
-            "content": f"Prompt a evaluar:\n\n{user_prompt}",
-        },
+        {"role": "user", "content": f"Prompt a evaluar:\n\n{user_prompt}"},
     ]
 
     raw_text = ollama_chat(messages)
@@ -141,41 +173,54 @@ def call_llm_answer(prompt: str) -> str:
         },
         {"role": "user", "content": prompt},
     ]
-    return ollama_chat(messages)
+    return ollama_chat(messages, timeout=180)
 
 # ---------------------------
-# UI principal Streamlit
+# Estado de Streamlit
 # ---------------------------
 
-st.subheader("🧾 Prompt original")
-
-default_text = "Explícame qué es el aprendizaje automático."
-
-user_prompt = st.text_area(
-    "Pega aquí tu prompt:",
-    value=default_text,
-    height=200,
-)
-
-col_eval, col_compare = st.columns([1, 1])
-
-with col_eval:
-    evaluate_btn = st.button("✅ Evaluar y Optimizar Prompt", type="primary")
-
-with col_compare:
-    compare_btn = st.button("🔄 Generar y Comparar Respuestas")
-
-# Estado
 if "evaluation" not in st.session_state:
     st.session_state.evaluation = None
+
 if "original_answer" not in st.session_state:
     st.session_state.original_answer = None
+
 if "improved_answer" not in st.session_state:
     st.session_state.improved_answer = None
 
 # ---------------------------
-# Evaluación
+# UI principal: Prompt original
 # ---------------------------
+
+st.markdown('<div class="prompt-card">', unsafe_allow_html=True)
+st.markdown(
+    """
+    <p style="
+        font-size:1.1rem;
+        font-weight:700;
+        margin:0 0 0.5rem 0;
+    ">
+        Prompt original
+    </p>
+    """,
+    unsafe_allow_html=True,
+)
+
+default_text = "Explícame qué es el aprendizaje automático."
+user_prompt = st.text_area(
+    "Pega aquí tu prompt:",
+    value=default_text,
+    height=180,
+)
+st.markdown("</div>", unsafe_allow_html=True)
+
+# Botón de evaluación
+evaluate_btn = st.button("✅ Evaluar y Optimizar Prompt", type="primary")
+
+# ---------------------------
+# Lógica de evaluación
+# ---------------------------
+
 if evaluate_btn:
     if not user_prompt.strip():
         st.warning("Escribe un prompt antes de evaluarlo.")
@@ -184,6 +229,7 @@ if evaluate_btn:
             try:
                 evaluation = call_prompt_evaluator(user_prompt)
                 st.session_state.evaluation = evaluation
+                # Limpiamos respuestas de comparaciones previas
                 st.session_state.original_answer = None
                 st.session_state.improved_answer = None
             except Exception as e:
@@ -191,9 +237,12 @@ if evaluate_btn:
 
 evaluation = st.session_state.evaluation
 
+# ---------------------------
+# Mostrar resultados de evaluación
+# ---------------------------
+
 if evaluation:
     st.markdown("---")
-    st.subheader("📊 Resultado de la Evaluación")
 
     total_score = evaluation.get("total_score", 0)
     scores = evaluation.get("scores", {})
@@ -202,9 +251,21 @@ if evaluation:
     improved_prompt = evaluation.get("improved_prompt", "")
     short_explanation = evaluation.get("short_explanation", "")
 
-    st.metric("Puntuación total (1–100)", total_score)
+    # 1) Desglose por dimensión
+    st.markdown('<div class="prompt-card">', unsafe_allow_html=True)
+    st.markdown(
+        """
+        <p style="
+            font-size:1.1rem;
+            font-weight:700;
+            margin:0 0 0.5rem 0;
+        ">
+            Desglose por dimensión
+        </p>
+        """,
+        unsafe_allow_html=True,
+    )
 
-    st.write("### Desglose por dimensión")
     c1, c2, c3, c4, c5 = st.columns(5)
     c1.metric("Persona / Rol", scores.get("persona", 0))
     c2.metric("Tarea / Objetivo", scores.get("tarea", 0))
@@ -212,65 +273,177 @@ if evaluation:
     c4.metric("Restricciones", scores.get("restricciones", 0))
     c5.metric("Claridad", scores.get("claridad", 0))
 
-    st.write("### Diagnóstico didáctico")
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    # 2) Resultado global
+    st.markdown('<div class="prompt-card">', unsafe_allow_html=True)
+    st.markdown(
+        """
+        <p style="
+            font-size:1.1rem;
+            font-weight:700;
+            margin:0 0 0.5rem 0;
+        ">
+            Resultado global del prompt
+        </p>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.metric("Puntuación total (1–100)", total_score)
+
+    if short_explanation:
+        st.info(short_explanation)
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    # 3) Diagnóstico didáctico
+    st.markdown('<div class="prompt-card">', unsafe_allow_html=True)
+    st.markdown(
+        """
+        <p style="
+            font-size:1.1rem;
+            font-weight:700;
+            margin:0 0 0.5rem 0;
+        ">
+            Diagnóstico didáctico
+        </p>
+        """,
+        unsafe_allow_html=True,
+    )
+
     st.write(f"**Persona / Rol:** {diagnosis.get('persona', '')}")
     st.write(f"**Tarea / Objetivo:** {diagnosis.get('tarea', '')}")
     st.write(f"**Contexto:** {diagnosis.get('contexto', '')}")
     st.write(f"**Restricciones:** {diagnosis.get('restricciones', '')}")
     st.write(f"**Claridad:** {diagnosis.get('claridad', '')}")
 
-    if short_explanation:
-        st.info(short_explanation)
+    st.markdown("</div>", unsafe_allow_html=True)
 
+    # 4) Sugerencias de mejora
     if improvements:
-        st.write("### Sugerencias de mejora")
+        st.markdown('<div class="prompt-card">', unsafe_allow_html=True)
+        st.markdown(
+            """
+            <p style="
+                font-size:1.1rem;
+                font-weight:700;
+                margin:0 0 0.5rem 0;
+            ">
+                Sugerencias de mejora
+            </p>
+            """,
+            unsafe_allow_html=True,
+        )
         for i, idea in enumerate(improvements, start=1):
             st.markdown(f"- **{i}.** {idea}")
+        st.markdown("</div>", unsafe_allow_html=True)
 
-    st.write("### 🧠 Prompt optimizado")
-    st.code(
-        improved_prompt or "No se pudo generar un prompt optimizado.",
-        language="markdown",
+    # 5) Prompt optimizado (scroll vertical)
+    st.markdown('<div class="prompt-card">', unsafe_allow_html=True)
+    st.markdown(
+        """
+        <p style="
+            font-size:1.1rem;
+            font-weight:700;
+            margin:0 0 0.5rem 0;
+        ">
+            Prompt optimizado
+        </p>
+        """,
+        unsafe_allow_html=True,
     )
 
-# ---------------------------
-# Comparación de respuestas
-# ---------------------------
-if compare_btn:
-    if not evaluation:
-        st.warning("Primero evalúa el prompt para generar una versión optimizada.")
-    else:
-        improved_prompt = evaluation.get("improved_prompt", "")
-        if not improved_prompt:
-            st.warning("No hay prompt optimizado disponible.")
-        else:
-            with st.spinner("Generando respuestas (original vs optimizada)..."):
+    st.text_area(
+        "Puedes copiar y reutilizar este prompt optimizado:",
+        value=improved_prompt or "No se pudo generar un prompt optimizado.",
+        height=220,
+    )
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    # ---------------------------
+    # 6) Comparación de prompts y respuestas (al final)
+    # ---------------------------
+    if improved_prompt:
+        st.markdown('<div class="prompt-card">', unsafe_allow_html=True)
+        st.markdown(
+            """
+            <p style="
+                font-size:1.1rem;
+                font-weight:700;
+                margin:0 0 0.5rem 0;
+            ">
+                Comparación: prompt original vs optimizado
+            </p>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        col_p1, col_p2 = st.columns(2)
+
+        with col_p1:
+            st.markdown("**Prompt original**")
+            st.text_area(
+                "Prompt original",
+                value=user_prompt,
+                height=180,
+                key="original_prompt_display",
+            )
+
+        with col_p2:
+            st.markdown("**Prompt optimizado**")
+            st.text_area(
+                "Prompt optimizado",
+                value=improved_prompt,
+                height=180,
+                key="optimized_prompt_display",
+            )
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        # Botón para generar y comparar respuestas
+        compare_btn = st.button("🔄 Generar y comparar respuestas")
+
+        if compare_btn:
+            with st.spinner("Generando respuestas para ambos prompts..."):
                 try:
                     original_answer = call_llm_answer(user_prompt)
                     improved_answer = call_llm_answer(improved_prompt)
                     st.session_state.original_answer = original_answer
                     st.session_state.improved_answer = improved_answer
+                except requests.exceptions.ReadTimeout:
+                    st.error(
+                        "⏱️ El modelo tardó demasiado en responder. "
+                        "Puedes intentarlo de nuevo o probar con un prompt más corto."
+                    )
                 except Exception as e:
                     st.error(f"Ocurrió un error al generar las respuestas: {e}")
 
-if st.session_state.original_answer and st.session_state.improved_answer:
-    st.markdown("---")
-    st.subheader("🔍 Comparación de respuestas: Original vs Optimizada")
+        # Si ya tenemos respuestas, las mostramos lado a lado
+        if st.session_state.original_answer and st.session_state.improved_answer:
+            st.markdown('<div class="prompt-card">', unsafe_allow_html=True)
+            st.markdown(
+                """
+                <p style="
+                    font-size:1.1rem;
+                    font-weight:700;
+                    margin:0 0 0.5rem 0;
+                ">
+                    Respuestas generadas: original vs optimizado
+                </p>
+                """,
+                unsafe_allow_html=True,
+            )
 
-    col1, col2 = st.columns(2)
+            col_r1, col_r2 = st.columns(2)
 
-    with col1:
-        st.write("#### Prompt original")
-        st.code(user_prompt, language="markdown")
-        st.write("#### Respuesta")
-        st.write(st.session_state.original_answer)
+            with col_r1:
+                st.markdown("**Respuesta con el prompt original**")
+                st.write(st.session_state.original_answer)
 
-    with col2:
-        st.write("#### Prompt optimizado")
-        st.code(evaluation.get("improved_prompt", ""), language="markdown")
-        st.write("#### Respuesta")
-        st.write(st.session_state.improved_answer)
+            with col_r2:
+                st.markdown("**Respuesta con el prompt optimizado**")
+                st.write(st.session_state.improved_answer)
 
-    st.success(
-        "Deberías notar más estructura, contexto y claridad en la respuesta con el prompt optimizado."
-    )
+            st.markdown("</div>", unsafe_allow_html=True)
