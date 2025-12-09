@@ -1,4 +1,4 @@
-# Improve yours Prompts.
+# PromptLab Academy – Improve Your Prompting Skills.
 
  ![class](/ima/ima1.webp)
 
@@ -8,31 +8,34 @@
 
 1.  **Intro** 🧳
 
+This section introduces the idea behind the project: understanding why prompt quality matters in modern AI workflows. It explains how prompts act as the communication bridge between humans and large language models, and why improving this communication leads to clearer, more reliable, and more useful outputs.
+
 
 
 2.  **Tech Stack** 🤖
 
-
+Here you will find a brief overview of the technologies used to build the project. The application is powered by Streamlit for the interface and uses Llama 3.3 through Ollama to evaluate and optimize prompts locally. Python handles the logic, and Docker enables easy deployment across environments.
 
 
 3.  **Features** 🤳🏽
 
-
+This section highlights the core capabilities of PromptLab Academy: evaluating prompt quality, diagnosing weaknesses, generating optimized prompt versions, and comparing model responses. It summarizes how the tool guides users step by step toward clearer, more structured prompting.
 
 4.  **Process** 👣
 
-
+An explanation of how the application works internally, from receiving a user’s prompt to scoring it across five dimensions. It describes the flow of evaluation, optimization, and optional answer comparison, providing a high-level understanding of the system’s mechanics without going into code.
 
 5.  **Learning** 💡
 
-
+This part outlines what users gain by working with the tool. It focuses on developing better prompting habits, understanding the anatomy of effective instructions, recognizing common mistakes, and adopting a structured mindset toward prompt engineering.
 
 6.  **Improvement** 🔩
 
-
+A dedicated space to show visual examples, screenshots, or before-and-after results. This section helps users appreciate how clearer prompts dramatically change the model’s output quality. It also illustrates the interface and interaction flow of the application.
 
 7.  **Running the Project** ⚙️
 
+This final section explains how to launch the application locally, whether through Python, Streamlit, or Docker. It ensures that anyone can install the dependencies, connect to Ollama, start the server, and interact with the tool from their browser in minutes.
 
 
 8 .  **More** 🙌🏽
@@ -51,7 +54,7 @@ it’s the simplest way to support continued open knowledge sharing.
 
 ---------------------------------------------
 
-# :computer: Improve yours Prompts  :computer:
+# :computer: PromptLab Academy – Improve Your Prompting Skills  :computer:
 
 ---------------------------------------------
 
@@ -62,9 +65,12 @@ They interpret language probabilistically, generating responses based on pattern
 This means the quality of your results depends almost entirely on the quality of your instructions.
 
 A well-crafted prompt can:
-	•	transform vague outputs into high-precision answers,
-	•	reduce hallucinations and ambiguity,
-	•	dramatically improve efficiency in research, coding, analysis, writing, and automation.
+
+•	transform vague outputs into high-precision answers,
+
+•	reduce hallucinations and ambiguity,
+
+•	dramatically improve efficiency in research, coding, analysis, writing, and automation.
 
  ![class](/ima/ima2.jpg)
 
@@ -73,7 +79,7 @@ A weak prompt does the opposite.
 Improving your prompts is not about “tricking” the model—it’s about clear communication.
 Prompts are the language we use to express our goals to a machine, and mastering this language is one of the most valuable skills in the age of AI.
 
-# 1. What are prompts and why they atter.
+# 1. What are prompts and why they matter.
 
 A prompt is a set of instructions you give to an AI model.
 It defines what you want, how you want it, and why you want it.
@@ -82,10 +88,14 @@ Prompts matter because large language models don’t execute deterministic comma
 The clearer and more structured your prompt is, the more aligned the output will be with your expectations.
 
 Good prompting leads to:
-	•	better accuracy,
-	•	reduced iteration time,
-	•	consistent results across tasks and teams,
-	•	higher reliability and explainability.
+
+•	better accuracy,
+	
+•	reduced iteration time,
+	
+•	consistent results across tasks and teams,
+	
+•	higher reliability and explainability.
 
 Poor prompting leads to vague, generic, or incorrect answers.
 In other words:
@@ -102,27 +112,27 @@ These components dramatically influence the quality of the output.
 
 Here are the five pillars of an effective prompt:
 
-• **Persona / Role**
+**Persona / Role**
 
 Defines who the model should act as (expert, analyst, teacher, reviewer, etc.).
 A role changes tone, depth, and reasoning.
 
-• **Task / Objective**
+**Task / Objective**
 
 Explains what the model must deliver.
 Clear tasks result in targeted, relevant answers.
 
-• **Context**
+**Context**
 
 Provides background information to reduce ambiguity.
 LLMs perform best when they fully understand the scenario.
 
-• **Constraints**
+**Constraints**
 
 Specify format, length, language, tone, steps, or output structure.
 Constraints guide the model toward predictable and usable results.
 
-• **Clarity**
+**Clarity**
 
 Simple, direct, structured language is easier for both humans and models to interpret.
 
@@ -133,6 +143,7 @@ Together, these elements create a reliable, repeatable, and professional prompti
 Most users struggle with prompt writing because they unknowingly fall into common mistakes:
 
 Common issues include:
+
 	•	Writing prompts that are too vague or too broad.
 	•	Forgetting to define the goal or expected output.
 	•	Missing context, leading to hallucinations or irrelevant content.
@@ -151,6 +162,7 @@ Prompt engineering requires expertise, consistency, and iteration.
 But not everyone knows how to evaluate the quality of a prompt—or how to improve it.
 
 Automated evaluation solves these challenges by:
+
 	•	Applying expert-level rubrics objectively.
 	•	Highlighting weaknesses in role, task, context, constraints, and clarity.
 	•	Providing actionable feedback instantly.
@@ -172,11 +184,16 @@ Powered by Llama 3.3 running locally on Ollama, the application:
 ✅ Scores your prompt from 1 to 100
 
 Using a rubric based on five key dimensions of prompt engineering:
-	•	Persona / Role
-	•	Task / Objective
-	•	Context
-	•	Constraints
-	•	Clarity
+
+•	Persona / Role
+
+•	Task / Objective
+
+•	Context
+
+•	Constraints
+
+•	Clarity
 
 ✅ Provides a didactic diagnosis
 
@@ -193,8 +210,10 @@ This includes a clear role, explicit task, necessary context, and formatting con
 ✅ Compares outputs
 
 Users can optionally generate:
-	•	the model’s answer to the original prompt, and
-	•	the model’s answer to the optimized prompt,
+
+•	the model’s answer to the original prompt, and
+
+•	the model’s answer to the optimized prompt,
 
 displayed side-by-side to visualize how much the improvement changes the quality of the output.
 
