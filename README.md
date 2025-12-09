@@ -1,4 +1,4 @@
-# Improve yours Prompts.
+# PromptLab Academy – Improve Your Prompting Skills.
 
  ![class](/ima/ima1.webp)
 
@@ -54,7 +54,7 @@ it’s the simplest way to support continued open knowledge sharing.
 
 ---------------------------------------------
 
-# :computer: Improve yours Prompts  :computer:
+# :computer: PromptLab Academy – Improve Your Prompting Skills  :computer:
 
 ---------------------------------------------
 
