@@ -8,31 +8,34 @@
 
 1.  **Intro** 🧳
 
+This section introduces the idea behind the project: understanding why prompt quality matters in modern AI workflows. It explains how prompts act as the communication bridge between humans and large language models, and why improving this communication leads to clearer, more reliable, and more useful outputs.
+
 
 
 2.  **Tech Stack** 🤖
 
-
+Here you will find a brief overview of the technologies used to build the project. The application is powered by Streamlit for the interface and uses Llama 3.3 through Ollama to evaluate and optimize prompts locally. Python handles the logic, and Docker enables easy deployment across environments.
 
 
 3.  **Features** 🤳🏽
 
-
+This section highlights the core capabilities of PromptLab Academy: evaluating prompt quality, diagnosing weaknesses, generating optimized prompt versions, and comparing model responses. It summarizes how the tool guides users step by step toward clearer, more structured prompting.
 
 4.  **Process** 👣
 
-
+An explanation of how the application works internally, from receiving a user’s prompt to scoring it across five dimensions. It describes the flow of evaluation, optimization, and optional answer comparison, providing a high-level understanding of the system’s mechanics without going into code.
 
 5.  **Learning** 💡
 
-
+This part outlines what users gain by working with the tool. It focuses on developing better prompting habits, understanding the anatomy of effective instructions, recognizing common mistakes, and adopting a structured mindset toward prompt engineering.
 
 6.  **Improvement** 🔩
 
-
+A dedicated space to show visual examples, screenshots, or before-and-after results. This section helps users appreciate how clearer prompts dramatically change the model’s output quality. It also illustrates the interface and interaction flow of the application.
 
 7.  **Running the Project** ⚙️
-
+8.  
+This final section explains how to launch the application locally, whether through Python, Streamlit, or Docker. It ensures that anyone can install the dependencies, connect to Ollama, start the server, and interact with the tool from their browser in minutes.
 
 
 8 .  **More** 🙌🏽
