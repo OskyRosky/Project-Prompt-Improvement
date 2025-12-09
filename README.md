@@ -34,7 +34,7 @@ This part outlines what users gain by working with the tool. It focuses on devel
 A dedicated space to show visual examples, screenshots, or before-and-after results. This section helps users appreciate how clearer prompts dramatically change the model’s output quality. It also illustrates the interface and interaction flow of the application.
 
 7.  **Running the Project** ⚙️
-8.  
+
 This final section explains how to launch the application locally, whether through Python, Streamlit, or Docker. It ensures that anyone can install the dependencies, connect to Ollama, start the server, and interact with the tool from their browser in minutes.
 
 
