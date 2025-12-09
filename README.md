@@ -65,9 +65,12 @@ They interpret language probabilistically, generating responses based on pattern
 This means the quality of your results depends almost entirely on the quality of your instructions.
 
 A well-crafted prompt can:
-	•	transform vague outputs into high-precision answers,
-	•	reduce hallucinations and ambiguity,
-	•	dramatically improve efficiency in research, coding, analysis, writing, and automation.
+
+•	transform vague outputs into high-precision answers,
+
+•	reduce hallucinations and ambiguity,
+
+•	dramatically improve efficiency in research, coding, analysis, writing, and automation.
 
  ![class](/ima/ima2.jpg)
 
@@ -76,7 +79,7 @@ A weak prompt does the opposite.
 Improving your prompts is not about “tricking” the model—it’s about clear communication.
 Prompts are the language we use to express our goals to a machine, and mastering this language is one of the most valuable skills in the age of AI.
 
-# 1. What are prompts and why they atter.
+# 1. What are prompts and why they matter.
 
 A prompt is a set of instructions you give to an AI model.
 It defines what you want, how you want it, and why you want it.
@@ -85,10 +88,14 @@ Prompts matter because large language models don’t execute deterministic comma
 The clearer and more structured your prompt is, the more aligned the output will be with your expectations.
 
 Good prompting leads to:
-	•	better accuracy,
-	•	reduced iteration time,
-	•	consistent results across tasks and teams,
-	•	higher reliability and explainability.
+
+•	better accuracy,
+	
+•	reduced iteration time,
+	
+•	consistent results across tasks and teams,
+	
+•	higher reliability and explainability.
 
 Poor prompting leads to vague, generic, or incorrect answers.
 In other words:
@@ -136,6 +143,7 @@ Together, these elements create a reliable, repeatable, and professional prompti
 Most users struggle with prompt writing because they unknowingly fall into common mistakes:
 
 Common issues include:
+
 	•	Writing prompts that are too vague or too broad.
 	•	Forgetting to define the goal or expected output.
 	•	Missing context, leading to hallucinations or irrelevant content.
@@ -154,6 +162,7 @@ Prompt engineering requires expertise, consistency, and iteration.
 But not everyone knows how to evaluate the quality of a prompt—or how to improve it.
 
 Automated evaluation solves these challenges by:
+
 	•	Applying expert-level rubrics objectively.
 	•	Highlighting weaknesses in role, task, context, constraints, and clarity.
 	•	Providing actionable feedback instantly.
@@ -175,11 +184,16 @@ Powered by Llama 3.3 running locally on Ollama, the application:
 ✅ Scores your prompt from 1 to 100
 
 Using a rubric based on five key dimensions of prompt engineering:
-	•	Persona / Role
-	•	Task / Objective
-	•	Context
-	•	Constraints
-	•	Clarity
+
+•	Persona / Role
+
+•	Task / Objective
+
+•	Context
+
+•	Constraints
+
+•	Clarity
 
 ✅ Provides a didactic diagnosis
 
@@ -196,8 +210,10 @@ This includes a clear role, explicit task, necessary context, and formatting con
 ✅ Compares outputs
 
 Users can optionally generate:
-	•	the model’s answer to the original prompt, and
-	•	the model’s answer to the optimized prompt,
+
+•	the model’s answer to the original prompt, and
+
+•	the model’s answer to the optimized prompt,
 
 displayed side-by-side to visualize how much the improvement changes the quality of the output.
 
