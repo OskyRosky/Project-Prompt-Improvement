@@ -112,27 +112,27 @@ These components dramatically influence the quality of the output.
 
 Here are the five pillars of an effective prompt:
 
-• **Persona / Role**
+**Persona / Role**
 
 Defines who the model should act as (expert, analyst, teacher, reviewer, etc.).
 A role changes tone, depth, and reasoning.
 
-• **Task / Objective**
+**Task / Objective**
 
 Explains what the model must deliver.
 Clear tasks result in targeted, relevant answers.
 
-• **Context**
+**Context**
 
 Provides background information to reduce ambiguity.
 LLMs perform best when they fully understand the scenario.
 
-• **Constraints**
+**Constraints**
 
 Specify format, length, language, tone, steps, or output structure.
 Constraints guide the model toward predictable and usable results.
 
-• **Clarity**
+**Clarity**
 
 Simple, direct, structured language is easier for both humans and models to interpret.
 
