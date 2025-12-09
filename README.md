@@ -55,11 +55,11 @@ it’s the simplest way to support continued open knowledge sharing.
 
 ---------------------------------------------
 
-# 0. Why improving yours prompt ? 
+# 0. Why improving yours prompts ? 
 
 
 
- ![class](/ima/ima2.png)
+ ![class](/ima/ima2.jpg)
 
 # 1. .
 
