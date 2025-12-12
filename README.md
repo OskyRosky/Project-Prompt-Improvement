@@ -1,4 +1,4 @@
-# PromptLab Academy – Improve Your Prompting Skills .
+# PromptLab Academy – Improve Your Prompting Skills.
 
  ![class](/ima/ima1.webp)
 
